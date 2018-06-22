@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>淺談 Puppeteer</title>
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/blood.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>淺談 Puppeteer</h2>
+					<h6 style="text-align: right;margin-top: 20%; color: #aaa;">Yiheng Wang 06/28</h6>
+				</section>
+				<section>
+					<h3>Introduction</h3>
+					<img data-src="https://thephysicaleducator.com/wp-content/uploads/2014/11/What-Why-How.png" />
+				</section>
+				<section>
+					<section>
+						<h3><span style="color:red;">What</span> is puppeteer</h3>
+						<p class="fragment" style="white-space:initial;text-align:left;line-height: 2em;margin: 0 1em;">
+						Puppeteer is a Node library which provides a high-level API 
+						to control headless Chrome or Chromium over the DevTools Protocol. 
+						It can also be configured to use full (non-headless) Chrome or Chromium.
+						</p>
+					</section>
+					<section>
+						<h3><span style="color:red;">What</span> can puppeteer do</h3>
+						<div style="text-align:left; font-size: .8em; margin: 0 1em;">
+							<p class="fragment">・ Generate screenshots and PDFs of pages.</p>
+							<p class="fragment">・ Crawl a SPA and generate pre-rendered content (i.e. "SSR").</p>
+							<p class="fragment">・ Automate form submission, UI testing, keyboard input, etc.</p>
+							<p class="fragment">・ Create an up-to-date, automated testing environment. Run your tests directly in the latest version of Chrome using the latest JavaScript and browser features.</p>
+							<p class="fragment">・ Capture a timeline trace of your site to help diagnose performance issues.</p>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3><span style="color:red;">Why</span> is puppeteer</h3>
+						<div style="text-align:left; font-size: .8em; margin: 0 1em;">
+							<p class="fragment">・ 簡易上手，無需複雜環境設定</p>
+							<p class="fragment">・ 使用上相對直覺</p>
+							<p class="fragment">・ 爸爸是 google</p>
+							<p class="fragment">・PhantomJS 和 Selenium IDE for Firefox 作者宣佈沒必要繼續維護其產品</p>
+						</div>
+					</section>
+					<section>
+						<h3>webdriver & puppeteer</h3>
+						<div>
+							<p>webdriver</p>
+							<pre>
+								<code data-trim>
+									const input = await driver.findElement(By.id('kw'));
+									await input.sendKeys('test');
+								</code>
+							</pre>
+						</div>
+						<div class="fragment">
+							<p>puppeteer</p>
+							<pre>
+								<code data-trim>
+									await page.focus('#kw');
+									await page.keyboard.sendCharacter('test');
+								</code>
+							</pre>
+						</div>
+					</section>	
+				</section>
+				<section>
+					<section>
+						<h3><span style="color:red;">How</span> do I begin</h3>
+						<pre>
+							<code data-trim>
+							mkdir test-puppeteer
+							cd test-puppeteer
+							</code>
+						</pre>
+						<p>and</p>
+						<pre><code>npm i puppeteer</code></pre>
+						<p>or</p>
+						<pre><code>yarn add puppeteer</code></pre>
+					</section>
+					<section>
+						<h3><span style="color:red;">How</span> do I work</h3>
+						<pre>
+							<code data-trim>
+								// index.js
+								const puppeteer = require('puppeteer');
+	
+								(async () => {
+									const browser = await puppeteer.launch();
+									const page = await browser.newPage();
+									await page.goto('https://example.com');
+									await page.screenshot({path: 'example.png'});
+								
+									await browser.close();
+								})();
+							</code>
+						</pre>
+						<pre><code>node index.js</code></pre>
+					</section>	
+				</section>
+				<section>
+					<h3>DEMO</h3>
+					<h6>E2E testing with puppeteer and jest</h4>
+				</section>
+				<section>
+					<h2>THE END</h2>
+					<h6 style="text-align: right;margin-top: 20%; color: #aaa;">感謝各位聆聽～</h6>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				],
+			});
+		</script>
+	</body>
+</html>
