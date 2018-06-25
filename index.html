@@ -108,7 +108,11 @@
 								(async () => {
 									const browser = await puppeteer.launch();
 									const page = await browser.newPage();
-									await page.goto('https://example.com');
+									await page.goto('https://www.google.com');
+									await page.focus('#lst-ib');
+									await page.keyboard.type('puppetter');
+									await page.keyboard.press('Enter');
+									await page.waitForNavigation();
 									await page.screenshot({path: 'example.png'});
 								
 									await browser.close();
@@ -119,12 +123,24 @@
 					</section>	
 				</section>
 				<section>
+					<h3>Puppeteer api</h3>
+					<div style="text-align: left;">
+						<p class="fragment">
+							・
+							<a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md" target="_blank">Puppeteer API Tip-Of-Tree</a>
+						</p>
+						<p class="fragment">
+							・
+							<a href="https://try-puppeteer.appspot.com/" target="_blank">Playground</a>
+						</p>
+					</div>
+				</section>
+				<section>
 					<h3>DEMO</h3>
-					<h6>E2E testing with puppeteer and jest</h4>
+					<h6>E2E testing with puppeteer and jest</h6>
 				</section>
 				<section>
 					<h2>THE END</h2>
-					<h6 style="text-align: right;margin-top: 20%; color: #aaa;">感謝各位聆聽～</h6>
 				</section>
 			</div>
 		</div>
